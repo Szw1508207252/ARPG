@@ -61,7 +61,7 @@ public class transform : MonoBehaviour
     {
         if(collision.gameObject.tag == "Groud")
         {
-            isJump = true;
+         //   isJump = true;
             
         }
     }
