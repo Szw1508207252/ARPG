@@ -15,7 +15,7 @@ public class CameraC : MonoBehaviour
     float yMaxLimit = 70;  //最大偏移量
     float disMinLimit = 2; //最小距离
     float disMaxLimit = 10; //最大距离
-    float distance = 4;  //摄像机距离；
+    float distance = 2;  //摄像机距离；
     float zoomRate = 80;  //放大系数；
 
     Vector3 offest = new Vector3(0,1,0); //相机偏移量
