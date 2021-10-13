@@ -1,37 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class MonsterC : Attribute
+using UnityEngine.UI;
+public class MonsterC : Attribute,FightInterface
 {
     protected float hp = 0;
     protected Animator ani;
     protected CharacterController cc;
-    protected float ¹¥»÷cd_;
-    protected float Ó²Ö±Ê±¼ä_;
-    protected float ·¢´ôÊ±¼ä_;
-    protected float ºóÒ¡Ê±¼ä_;
-    protected float Ç°Ò¡Ê±¼ä_;
-    public ¹ÖÎï×´Ì¬ ×´Ì¬_;
-    protected Transform Ä¿±ê;
+    protected float æ”»å‡»cd_;
+    protected float ç¡¬ç›´æ—¶é—´_;
+    protected float å‘å‘†æ—¶é—´_;
+    protected float åæ‘‡æ—¶é—´_;
+    protected float å‰æ‘‡æ—¶é—´_;
+    public æ€ªç‰©çŠ¶æ€ çŠ¶æ€_;
+    protected Transform ç›®æ ‡;
     protected Transform player;
+    public Image barhp;
+    Vector3[] å·¡é€»ç‚¹array = new Vector3[2];
+    int å·¡é€»ç‚¹ç›®æ ‡index = 0;
 
-    Vector3[] Ñ²Âßµãarray = new Vector3[2];
-    int Ñ²ÂßµãÄ¿±êindex = 0;
-
-    public enum ¹ÖÎï×´Ì¬
+    public enum æ€ªç‰©çŠ¶æ€
     {
-        Ã»ÓĞÄ¿±ê,
-        Ëø¶¨Ä¿±ê,
-        ËÀÍö,
-        ·¢´ô,
-        ×·»÷,
-        ¹¥»÷¾ö²ß,
-        ¹¥»÷Ç°Ò¡,
-        ¹¥»÷ÖĞ,
-        ¹¥»÷¿ªÊ¼,
-        ¹¥»÷ºóÒ¡,
-        Ó²Ö±
+        æ²¡æœ‰ç›®æ ‡,
+        é”å®šç›®æ ‡,
+        æ­»äº¡,
+        å‘å‘†,
+        è¿½å‡»,
+        æ”»å‡»å†³ç­–,
+        æ”»å‡»å‰æ‘‡,
+        æ”»å‡»ä¸­,
+        æ”»å‡»å¼€å§‹,
+        æ”»å‡»åæ‘‡,
+        ç¡¬ç›´
 
     }
 
@@ -40,47 +40,58 @@ public class MonsterC : Attribute
         binbing();
     }
 
-    void binbing() //°ó¶¨º¯Êı
+    void binbing() //ç»‘å®šå‡½æ•°
     {
         cc = this.GetComponent<CharacterController>();
         ani = this.transform.GetChild(0).GetComponent<Animator>();
         hp = hpMax;
+        ç¡¬ç›´æ—¶é—´_ = ç¡¬ç›´æ—¶é—´;
+        å‘å‘†æ—¶é—´_ = å‘å‘†æ—¶é—´;
+        åæ‘‡æ—¶é—´_ = åæ‘‡æ—¶é—´;
+        æ”»å‡»cd_ = æ”»å‡»CD;
+        å‰æ‘‡æ—¶é—´_ = å‰æ‘‡æ—¶é—´;
     }
     void Start()
     {
-        Vector3 ³öÉúµãpos = this.transform.position;
-        Ñ²Âßµãarray[0] = ³öÉúµãpos + new Vector3(Random.Range(1, 3), 0, Random.Range(1, 3));
-        Ñ²Âßµãarray[1] = ³öÉúµãpos + new Vector3(Random.Range(-1, -3), 0, Random.Range(-1, -3));
+        Vector3 å‡ºç”Ÿç‚¹pos = this.transform.position;
+        å·¡é€»ç‚¹array[0] = å‡ºç”Ÿç‚¹pos + new Vector3(Random.Range(1, 3), 0, Random.Range(1, 3));
+        å·¡é€»ç‚¹array[1] = å‡ºç”Ÿç‚¹pos + new Vector3(Random.Range(-1, -3), 0, Random.Range(-1, -3));
     }
 
   
     void Update()
     {
-        switch (×´Ì¬_)
+        switch (çŠ¶æ€_)
         {
-            case ¹ÖÎï×´Ì¬.Ã»ÓĞÄ¿±ê:
-                ³¢ÊÔ·¢ÏÖÄ¿±ê();
+            case æ€ªç‰©çŠ¶æ€.æ²¡æœ‰ç›®æ ‡:
+                å°è¯•å‘ç°ç›®æ ‡();
                 break;
-            case ¹ÖÎï×´Ì¬.Ëø¶¨Ä¿±ê:
-                Õë¶ÔÄ¿±ê¾ö²ß();
+            case æ€ªç‰©çŠ¶æ€.é”å®šç›®æ ‡:
+                é’ˆå¯¹ç›®æ ‡å†³ç­–();
                 break;
-            case ¹ÖÎï×´Ì¬.×·»÷:
-                ´¦Àí×·»÷();
+            case æ€ªç‰©çŠ¶æ€.è¿½å‡»:
+                å¤„ç†è¿½å‡»();
                 break;
-            case ¹ÖÎï×´Ì¬.¹¥»÷¾ö²ß:
-                Õë¶Ô¹¥»÷¾ö²ß();
+            case æ€ªç‰©çŠ¶æ€.æ”»å‡»å†³ç­–:
+                é’ˆå¯¹æ”»å‡»å†³ç­–();
                 break;
-            case ¹ÖÎï×´Ì¬.¹¥»÷¿ªÊ¼:
-                ¹¥»÷·¢¶¯();
+            case æ€ªç‰©çŠ¶æ€.æ”»å‡»å¼€å§‹:
+                æ”»å‡»å‘åŠ¨();
                 break;
-            case ¹ÖÎï×´Ì¬.¹¥»÷Ç°Ò¡:
-                Ç°Ò¡();
+            case æ€ªç‰©çŠ¶æ€.æ”»å‡»å‰æ‘‡:
+                å‰æ‘‡();
                 break;
-            case ¹ÖÎï×´Ì¬.¹¥»÷ºóÒ¡:
-                ºóÒ¡();
+            case æ€ªç‰©çŠ¶æ€.æ”»å‡»åæ‘‡:
+                åæ‘‡();
                 break;
-            case ¹ÖÎï×´Ì¬.·¢´ô:
-                ·¢´ô();
+            case æ€ªç‰©çŠ¶æ€.å‘å‘†:
+                å‘å‘†();
+                break;
+            case æ€ªç‰©çŠ¶æ€.ç¡¬ç›´:
+                ç¡¬ç›´();
+                break;
+            case æ€ªç‰©çŠ¶æ€.æ­»äº¡:
+                æ­»äº¡();
                 break;
 
         }
@@ -88,7 +99,7 @@ public class MonsterC : Attribute
 
     }
 
-   void ³¢ÊÔ·¢ÏÖÄ¿±ê()
+   void å°è¯•å‘ç°ç›®æ ‡()
     {
         if(player == null )
         {
@@ -96,98 +107,188 @@ public class MonsterC : Attribute
         }
        
         float distance = Vector3.Distance(this.transform.position, player.position);       
-        Ñ²Âß();
-       if(distance <= Ìı¾õ·¶Î§)
+        å·¡é€»();
+       if(distance <= å¬è§‰èŒƒå›´)
         {
-            ·¢ÏÖÄ¿±ê();
+            å‘ç°ç›®æ ‡();
         }
-        else if(distance <= ÊÓ¾õ·¶Î§ && ToolMethod.»ñÈ¡ÓëÄ¿±êµÄ¼Ğ½Ç(player.position,this.transform)<60)  //Ä¿±êÓë¹ÖÊŞÊÓÒ°ÖĞĞÄµãÖ®¼ä¼Ğ½ÇĞ¡ÓÚÒ°¹Ö×ÜÊÓÒ°¼Ğ½ÇµÄÒ»°ë
+        else if(distance <= è§†è§‰èŒƒå›´ && ToolMethod.è·å–ä¸ç›®æ ‡çš„å¤¹è§’(player.position,this.transform)<60)  //ç›®æ ‡ä¸æ€ªå…½è§†é‡ä¸­å¿ƒç‚¹ä¹‹é—´å¤¹è§’å°äºé‡æ€ªæ€»è§†é‡å¤¹è§’çš„ä¸€åŠ
         {
-            ·¢ÏÖÄ¿±ê();
+            å‘ç°ç›®æ ‡();
         }
         else
         {
-            ½â³ıÄ¿±ê();
+            è§£é™¤ç›®æ ‡();
         }
     }
-    void ·¢ÏÖÄ¿±ê()
+    void å‘ç°ç›®æ ‡()
     {
-        ×´Ì¬_ = ¹ÖÎï×´Ì¬.Ëø¶¨Ä¿±ê;
-        Ä¿±ê = player;
+        çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.é”å®šç›®æ ‡;
+        ç›®æ ‡ = player;
     }
-    void ½â³ıÄ¿±ê()
+    void è§£é™¤ç›®æ ‡()
     {
-        ×´Ì¬_ = ¹ÖÎï×´Ì¬.Ã»ÓĞÄ¿±ê;
-        Ä¿±ê = null;
+        çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.æ²¡æœ‰ç›®æ ‡;
+        ç›®æ ‡ = null;
     }
-    void Ñ²Âß()
+    void å·¡é€»()
     {
-        this.transform.LookAt(Ñ²Âßµãarray[Ñ²ÂßµãÄ¿±êindex]);
+        this.transform.LookAt(å·¡é€»ç‚¹array[å·¡é€»ç‚¹ç›®æ ‡index]);
         cc.Move(this.transform.forward * moveSpeed * Time.deltaTime);
-        if (Vector3.Distance(this.transform.position, Ñ²Âßµãarray[Ñ²ÂßµãÄ¿±êindex])< 0.1f)
+        if (Vector3.Distance(this.transform.position, å·¡é€»ç‚¹array[å·¡é€»ç‚¹ç›®æ ‡index])< 0.1f)
         {
-            Ñ²ÂßµãÄ¿±êindex= ++Ñ²ÂßµãÄ¿±êindex % Ñ²Âßµãarray.Length;
+            å·¡é€»ç‚¹ç›®æ ‡index= ++å·¡é€»ç‚¹ç›®æ ‡index % å·¡é€»ç‚¹array.Length;
         }
     }
    
 
-    void Õë¶ÔÄ¿±ê¾ö²ß()
+    void é’ˆå¯¹ç›®æ ‡å†³ç­–()
     {
         int R = Random.Range(0, 100);
-        if(R <= ×·»÷¸ÅÂÊ)
+        if(R <= è¿½å‡»æ¦‚ç‡)
         {
-            ×´Ì¬_ = ¹ÖÎï×´Ì¬.×·»÷;
+            çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.è¿½å‡»;
         }
         else
         {
-            ×´Ì¬_ = ¹ÖÎï×´Ì¬.·¢´ô;
+            çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.å‘å‘†;
         }
     }
-    void ´¦Àí×·»÷()
+    void å¤„ç†è¿½å‡»()
     {
-        if(¼ì²âÊÇ·ñ¿É¹¥»÷())
+        if(æ£€æµ‹æ˜¯å¦å¯æ”»å‡»())
         {
-            ×´Ì¬_ = ¹ÖÎï×´Ì¬.¹¥»÷¾ö²ß;
+            çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.æ”»å‡»å†³ç­–;
             return;
         }
-        if(¼ì²âÊÇ·ñÊ§È¥Ä¿±ê())
+        if(æ£€æµ‹æ˜¯å¦å¤±å»ç›®æ ‡())
         {
-            ×´Ì¬_ = ¹ÖÎï×´Ì¬.Ã»ÓĞÄ¿±ê;
+            çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.æ²¡æœ‰ç›®æ ‡;
             return;
         }
-        Vector3 pos = Ä¿±ê.position;
+        Vector3 pos = ç›®æ ‡.position;
         pos.y = this.transform.position.y;
         this.transform.LookAt(pos);
         cc.Move(this.transform.forward * moveSpeed * Time.deltaTime);
     }
-    bool ¼ì²âÊÇ·ñÊ§È¥Ä¿±ê()
+    bool æ£€æµ‹æ˜¯å¦å¤±å»ç›®æ ‡()
     {
+        float distance = Vector3.Distance(this.transform.position, ç›®æ ‡.position);
+        if(distance >ã€€å¤±å»ç›®æ ‡è·ç¦»)
+        {
+            return true;
+        }
         return false;
     }
-    bool ¼ì²âÊÇ·ñ¿É¹¥»÷()
+    bool æ£€æµ‹æ˜¯å¦å¯æ”»å‡»()
     {
+        float distance = Vector3.Distance(this.transform.position, ç›®æ ‡.position);
+        if(distance < æ”»å‡»è·ç¦»)
+        {
+            return true;
+        }
         return false;
     }
-    void Õë¶Ô¹¥»÷¾ö²ß()
+    void é’ˆå¯¹æ”»å‡»å†³ç­–()
     {
+        int R = Random.Range(0, 100);
+        if(R < æ”»å‡»æ¦‚ç‡)
+        {
+            ani.SetBool("walk", false);
+            ani.SetTrigger("beforeAtk");
+            
+            çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.æ”»å‡»å‰æ‘‡;
+        }
+        else
+        {
+            çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.å‘å‘†;
+        }
+    }
+    void æ”»å‡»å‘åŠ¨()
+    {
+        æ”»å‡»cd_ -= Time.deltaTime;
+        if(æ”»å‡»cd_ < 0)
+        {
+            ani.SetTrigger("afterAtk");
+            //ä¼¤å®³åˆ¤å®š
+            çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.æ”»å‡»åæ‘‡;
+             æ”»å‡»cd_ = æ”»å‡»CD;
+        }
+    }
+    void å‰æ‘‡()
+    {
+        Vector3 pos = ç›®æ ‡.position;
+        pos.y = this.transform.position.y; //é˜²æ­¢æ€ªç‰©é«˜åº¦ä¸äººç‰©é«˜åº¦ä¸ä¸€è‡´ï¼Œäº§ç”Ÿå€¾æ–œ
+        this.transform.LookAt(pos);
+        å‰æ‘‡æ—¶é—´_ -= Time.deltaTime;
+        if(å‰æ‘‡æ—¶é—´_ < 0)
+        {
+            ani.SetTrigger("atk");
+            çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.æ”»å‡»å¼€å§‹;
+            å‰æ‘‡æ—¶é—´_ = å‰æ‘‡æ—¶é—´;
+        }
 
     }
-    void ¹¥»÷·¢¶¯()
+    void åæ‘‡()
     {
-
-    }
-    void Ç°Ò¡()
-    {
-
-    }
-    void ºóÒ¡()
-    {
-
+        åæ‘‡æ—¶é—´_ -= Time.deltaTime;
+        if(åæ‘‡æ—¶é—´_ < 0)
+        {
+            çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.æ²¡æœ‰ç›®æ ‡;
+            åæ‘‡æ—¶é—´_ = åæ‘‡æ—¶é—´;
+        }
     } 
-    void ·¢´ô()
+    void å‘å‘†()
     {
+        å‘å‘†æ—¶é—´_ -= Time.deltaTime;
+        if (å‘å‘†æ—¶é—´_ < 0)
+        {
+            çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.æ²¡æœ‰ç›®æ ‡;
+            å‘å‘†æ—¶é—´_ = å‘å‘†æ—¶é—´; 
+        }
+    }
+    void ç¡¬ç›´()
+    {
+        ç¡¬ç›´æ—¶é—´_ -= Time.deltaTime;
+        if (ç¡¬ç›´æ—¶é—´_ < 0)
+        {
+            çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.æ²¡æœ‰ç›®æ ‡;
+            ç¡¬ç›´æ—¶é—´_ = ç¡¬ç›´æ—¶é—´;
+        }
+    }
+    void æ­»äº¡()
+    {
+        ani.SetBool("die", true);
+        Destroy(this.gameObject,3);
 
+        StartCoroutine(å¤„ç†æ­»äº¡æ•ˆæœ());
+    }
+    public void beHit(float atk)
+    {
+        if(çŠ¶æ€_== æ€ªç‰©çŠ¶æ€.æ­»äº¡)
+        {
+            return;
+        }
+        ç¡¬ç›´æ—¶é—´_ = ç¡¬ç›´æ—¶é—´;
+        å‘å‘†æ—¶é—´_ = å‘å‘†æ—¶é—´;
+        åæ‘‡æ—¶é—´_ = åæ‘‡æ—¶é—´;
+        æ”»å‡»cd_ = æ”»å‡»CD;
+        å‰æ‘‡æ—¶é—´_ = å‰æ‘‡æ—¶é—´;
+        çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.ç¡¬ç›´;
+        ani.SetTrigger("beHit");
+        this.hp -= atk;
+        barhp.fillAmount = hp / hpMax;
+        if(hp <= 0)
+        {
+            Time.timeScale = 0.1f;
+            çŠ¶æ€_ = æ€ªç‰©çŠ¶æ€.æ­»äº¡;
+        }
     }
 
-
+    IEnumerator å¤„ç†æ­»äº¡æ•ˆæœ()
+    {
+        yield return new WaitForSecondsRealtime(3);
+        Time.timeScale = 1;
+        Destroy(this.gameObject,1);
+    }
 }
