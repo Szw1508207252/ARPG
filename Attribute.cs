@@ -5,19 +5,19 @@ using UnityEngine;
 public class Attribute : MonoBehaviour
 {
     public string name_;
-    protected float hpMax = 10;
-    protected float ¹¥»÷CD = 10;
+    protected float hpMax = 30;
+    protected float æ”»å‡»CD = 0.5f;
     protected float moveSpeed = 1;
-    protected float Ó²Ö±Ê±¼ä = 0.3f;
-    protected float ¹¥»÷¸ÅÂÊ = 50;
-    protected float ×·»÷¸ÅÂÊ = 80;
-    protected float ·¢´ôÊ±¼ä = 1;
-    protected float Ç°Ò¡Ê±¼ä = 1;
-    protected float ÆÕÍ¨ÉúĞ§Ê±¼ä = 0.5f;
-    protected float ºóÒ¡Ê±¼ä = 1;
-    protected float ÊÓ¾õ·¶Î§ = 5;
-    protected float Ìı¾õ·¶Î§ = 6;
-    protected float ¹¥»÷¾àÀë = 2;
-    protected float Ê§È¥Ä¿±ê¾àÀë = 8;
-    protected bool ÊÇ·ñ¿´ÏòÖ÷½Ç = false;
+    protected float ç¡¬ç›´æ—¶é—´ = 0.3f;
+    protected float æ”»å‡»æ¦‚ç‡ = 80;
+    protected float è¿½å‡»æ¦‚ç‡ = 80;
+    protected float å‘å‘†æ—¶é—´ = 1;
+    protected float å‰æ‘‡æ—¶é—´ = 1;
+    protected float æ™®é€šç”Ÿæ•ˆæ—¶é—´ = 0.5f;
+    protected float åæ‘‡æ—¶é—´ = 1;
+    protected float è§†è§‰èŒƒå›´ = 5;
+    protected float å¬è§‰èŒƒå›´ = 6;
+    protected float æ”»å‡»è·ç¦» = 2;
+    protected float å¤±å»ç›®æ ‡è·ç¦» = 8;
+    protected bool æ˜¯å¦çœ‹å‘ä¸»è§’ = false;
 }
