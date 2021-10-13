@@ -6,7 +6,7 @@ public class PlayerAniC : MonoBehaviour
 {
     public Animator ani;
     public inputC inputC;
-    float Á¬»÷ÊıÖØÖÃTime = 0;
+    float è¿å‡»æ•°é‡ç½®Time = 0;
     void Start()
     {
        
@@ -15,28 +15,28 @@ public class PlayerAniC : MonoBehaviour
     void Update()
     {
 
-        ani.SetFloat("aniTime", Mathf.Repeat(ani.GetCurrentAnimatorStateInfo(0).normalizedTime,1)); //ÉèÖÃ²ÎÊıaniTime£¬ÔÚ£¨0,1£©±ä»¯
+        ani.SetFloat("aniTime", Mathf.Repeat(ani.GetCurrentAnimatorStateInfo(0).normalizedTime,1)); //è®¾ç½®å‚æ•°aniTimeï¼Œåœ¨ï¼ˆ0,1ï¼‰å˜åŒ–
 
-        if(inputC.m_atkTrigger) //ÅĞ¶¨Êó±ê×ó¼üµã»÷ºóÖ´ĞĞ¹¥»÷¶¯»­
+        if(inputC.m_atkTrigger) //åˆ¤å®šé¼ æ ‡å·¦é”®ç‚¹å‡»åæ‰§è¡Œæ”»å‡»åŠ¨ç”»
         {
-            Á¬»÷ÊıÖØÖÃTime = 2;  //Á½ÃëÄÚ²»½øĞĞ¹¥»÷£¬ÖØÖÃ¶¯»­¹ı³Ì
+            è¿å‡»æ•°é‡ç½®Time = 2;  //ä¸¤ç§’å†…ä¸è¿›è¡Œæ”»å‡»ï¼Œé‡ç½®åŠ¨ç”»è¿‡ç¨‹
             ani.SetTrigger("atk");
-            ani.SetInteger("Á¬»÷Êı", (ani.GetInteger("Á¬»÷Êı") + 1) % 3); //È¡Öµ 1¡¢2¡¢0ÅĞ¶¨¹¥»÷¶¯»­
+            ani.SetInteger("è¿å‡»æ•°", (ani.GetInteger("è¿å‡»æ•°") + 1) % 3); //å–å€¼ 1ã€2ã€0åˆ¤å®šæ”»å‡»åŠ¨ç”»
             
          
         }
-        // ½ÇÉ«ÒÆ¶¯
-        ani.SetFloat("Ë®Æ½ËÙ¶È",inputC.m_Movement.x);
-        ani.SetFloat("´¹Ö±ËÙ¶È",inputC.m_Movement.y);
-        Á¬»÷ÊıÖØÖÃTime -= Time.deltaTime;  
-        if(Á¬»÷ÊıÖØÖÃTime < 0)
+        // è§’è‰²ç§»åŠ¨
+        ani.SetFloat("æ°´å¹³é€Ÿåº¦",inputC.m_Movement.x);
+        ani.SetFloat("å‚ç›´é€Ÿåº¦",inputC.m_Movement.y);
+        è¿å‡»æ•°é‡ç½®Time -= Time.deltaTime;  
+        if(è¿å‡»æ•°é‡ç½®Time < 0)
         {
-            ani.SetInteger("Á¬»÷Êı", 0);  //ÔÚ
+            ani.SetInteger("è¿å‡»æ•°", 0);  
         }
     }
 
-    private void LateUpdate() //ÔÚUpdateÖ´ĞĞÍê²ÅÖ´ĞĞ
+    private void LateUpdate() //åœ¨Updateæ‰§è¡Œå®Œæ‰æ‰§è¡Œ
     {
-        ani.ResetTrigger("atk"); //·ÀÖ¹µã»÷¹ı¿ì£¬ÔÚ¹¥»÷¶¯»­¹ı³ÌÖĞµã»÷±ã¿ÉÖ´ĞĞºóÃæµÄ¹¥»÷¶¯»­¡£
+        ani.ResetTrigger("atk"); //é˜²æ­¢ç‚¹å‡»è¿‡å¿«ï¼Œåœ¨æ”»å‡»åŠ¨ç”»è¿‡ç¨‹ä¸­ç‚¹å‡»ä¾¿å¯æ‰§è¡Œåé¢çš„æ”»å‡»åŠ¨ç”»ã€‚
     }
 }
