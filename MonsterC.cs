@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MonsterC : Attribute,FightInterface
 {
+    public PlayerC playerC;
     protected float hp = 0;
     protected Animator ani;
     protected CharacterController cc;
@@ -192,7 +193,7 @@ public class MonsterC : Attribute,FightInterface
     void 针对攻击决策()
     {
         int R = Random.Range(0, 100);
-        if(R < 攻击概率)
+        if(R < 攻击概率 && playerC.hp > 0)
         {
             ani.SetBool("walk", false);
             ani.SetTrigger("beforeAtk");
@@ -210,7 +211,9 @@ public class MonsterC : Attribute,FightInterface
         if(攻击cd_ < 0)
         {
             ani.SetTrigger("afterAtk");
-            //伤害判定
+            
+            playerC.beHit(攻击力);
+
             状态_ = 怪物状态.攻击后摇;
              攻击cd_ = 攻击CD;
         }
@@ -280,7 +283,7 @@ public class MonsterC : Attribute,FightInterface
         barhp.fillAmount = hp / hpMax;
         if(hp <= 0)
         {
-            Time.timeScale = 0.1f;
+            Time.timeScale = 0.3f;  //慢动画
             状态_ = 怪物状态.死亡;
         }
     }
