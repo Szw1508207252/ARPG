@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerC : MonoBehaviour
 {
     public inputC inputC;
     public CharacterController controller;
-    public float walkSpeed = 2;
+    public float walkSpeed = 2;  
     public BoxCollider 攻击碰撞器;
+    public Image harhp;
+    public float hp;   //当前血量      
+    private float hpMax = 100;   //最大血量
     RaycastHit[] raycastHit = new RaycastHit[10];
+    public Animator ani;
+    public GameObject EndPlane;
     void Start()
     {
-        
+        this.hp = hpMax;
     }
 
    
@@ -55,5 +61,31 @@ public class PlayerC : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void beHit(float atk)
+    {
+        this.hp -= atk;
+        harhp.fillAmount = hp / hpMax;
+        ani.SetTrigger("beHit");
+        if (hp <= 0)
+        {
+            死亡();
+            Time.timeScale = 0.3f;
+        }
+    }
+
+    IEnumerator 处理死亡效果()
+    {
+        yield return new WaitForSecondsRealtime(3);
+        Time.timeScale = 1;
+        EndPlane.SetActive(true);
+    }
+    void 死亡()
+    {
+        ani.SetBool("die", true);
+      
+
+        StartCoroutine(处理死亡效果());
     }
 }
