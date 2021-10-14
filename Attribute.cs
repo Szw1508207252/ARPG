@@ -18,6 +18,7 @@ public class Attribute : MonoBehaviour
     protected float 视觉范围 = 5;
     protected float 听觉范围 = 6;
     protected float 攻击距离 = 2;
+    protected float 攻击力 = 10;
     protected float 失去目标距离 = 8;
     protected bool 是否看向主角 = false;
 }
