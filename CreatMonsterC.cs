@@ -9,9 +9,11 @@ public class CreatMonsterC : MonoBehaviour
     int index = 0;
     float timeCD = 1;
     float timeCD_ = 1;
-    int totalNum = 3; //Ë¢¹Ö×ÜÊı
-    int curNum = 0;   //µ±Ç°Ë¢¹ÖÊı
+    int totalNum = 3; //åˆ·æ€ªæ€»æ•°
+    int curNum = 0;   //å½“å‰åˆ·æ€ªæ•°
     bool makeMonster = false;
+
+    public PlayerC playerC;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,24 +27,25 @@ public class CreatMonsterC : MonoBehaviour
             return;
         if(makeMonster) 
         {
-            timeCD -= Time.deltaTime; //Ã¿Ãë¼õÒ»£ºCD
+            timeCD -= Time.deltaTime; //æ¯ç§’å‡ä¸€ï¼šåˆ·æ€ªCD
             if(timeCD < 0)
             {
-                timeCD = timeCD_;     //ÖØÖÃ
+                timeCD = timeCD_;     //é‡ç½®
                 doCreatMonster();
             }
         }      
     }
-    private void OnTriggerEnter(Collider other)  //µ±Ë¢¹Ö´¥·¢Æ÷ÓëtagÎª¡°Player¡±µÄÎïÌåÅö×²ºó£¬ÉèÖÃ¡°ÊÇ·ñË¢¹Ö¡±Îªtrue
+    private void OnTriggerEnter(Collider other)  //å½“åˆ·æ€ªè§¦å‘å™¨ä¸tagä¸ºâ€œPlayerâ€çš„ç‰©ä½“ç¢°æ’åï¼Œè®¾ç½®â€œæ˜¯å¦åˆ·æ€ªâ€ä¸ºtrue
     {
         if(other.CompareTag("Player"))
         {
             makeMonster = true;
         }
     }
-    void doCreatMonster()   //Ë¢¹Ö
+    void doCreatMonster()   //åˆ·æ€ª
     {
-        Instantiate(monster_perfab,posArray[index++ %posArray.Length].position,Quaternion.identity); //ÔÚË¢¹ÖµãÉú³É¹ÖÎï£»
+        GameObject go = Instantiate(monster_perfab,posArray[index++ %posArray.Length].position,Quaternion.identity); //åœ¨åˆ·æ€ªç‚¹ç”Ÿæˆæ€ªç‰©ï¼›
+        go.GetComponent<MonsterC>().playerC = playerC;     //é¢„åˆ¶ä½“ä¸èƒ½ç›´æ¥ç»‘å®šåœ¨åœºæ™¯é‡Œï¼Œéœ€è¦ä»£ç èµ‹å€¼ã€‚
         curNum++;
     }
 }
